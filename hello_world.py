@@ -1,2 +1,1 @@
- h = "helloworld"
- print(h)
+print("helloworld")
