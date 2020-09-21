@@ -34,7 +34,7 @@ page = Tk()
 page.title("Marvel API Characters")
 page.geometry("800x1000")
 
-fr = Frame(page, width = 400, height = 400)
+fr = Frame(page, width = 800, height = 1000)
 fr.pack()
 
 e = Entry(fr)
@@ -42,8 +42,7 @@ e.pack()
 
 
 
-text= Label(fr, text=" ")
-text.pack()
+
 
 
 def find():
@@ -53,6 +52,9 @@ def find():
 
 b = Button(fr,text='enter',command=find)
 b.pack()
+
+text= Label(fr, text=" ")
+text.pack()
                         
         
 
@@ -82,7 +84,7 @@ print (hulk_name + " | " + hulk_des)"""
 
 for character in data['data']['results']:
 	print (character['name'])
-	print (character['description'])
+	print (character['thumbnail'])
 	
 
 
