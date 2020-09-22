@@ -34,7 +34,7 @@ page = Tk()
 page.title("Marvel API Characters")
 page.geometry("800x1000")
 
-fr = Frame(page, width = 800, height = 1000)
+fr = Frame(page, width = 500, height = 600)
 fr.pack()
 
 e = Entry(fr)
@@ -49,6 +49,8 @@ def find():
         for character in data['data']['results']:
                 if e.get() == character['name']:
                         text.config(text = character['name'] + character['description'])
+                        
+
 
 b = Button(fr,text='enter',command=find)
 b.pack()
