@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- importing an external jquery library -->
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- setting an input field for recipe -->
+<input id="search">
+<!-- creating a search button linked to the above input field to carry out function getrecepe-->
+<button onclick="getrecepe(document.getElementById('search').value)">Search</button>
+<!-- blank divs and links for outputted recipe -->
+<div id="output"></div>
+<a href="" id = "sourceLink"></a>
+
+<script>
+	
+function getsource(id){
+	// using ajax method of http requests to access api
+	$.ajax({
+		//calling the spoonacular api server link using the specific id parameter
+		url:"https://api.spoonacular.com/recipes/" + id + "/information?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14",
+		// ajax success carries out the res function once the requests to my specific api key suceeds 
+		success: function(res){
+			//this function recieves the specific link of the searched recipe an puts it into the 2 empty div "sourceLink"
+			document.getElementById("sourceLink").innerHTML=res.sourceUrl
+			document.getElementById("sourceLink").href=res.sourceUrl
+		}
+	});
+}
+
+//this is the function that the search button will do once clicked. It passes the parameter "q" which is the specific recipe being searched in the user's input/query
+function getrecepe(q){
+	//another request using the jquery ajax request method 
+	$.ajax({
+		//it first will push out a request to call the api server using my specific api key and the searched recipe name as 'q'
+		url:"https://api.spoonacular.com/recipes/search?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14&number=1&query="+q,
+		//again, once the above requests suceeds, the main function will carry out
+		success: function(res){
+			//styles the empty output div as a large font for the recipe's title, and uses the parameter res as the searched recipe to get the name of the recipe along with its associated image. this function also references res.results to retrieve the serving amount of the recipe
+			document.getElementById("output").innerHTML="<h1>" + res.results[0].title+"</h1><br><img src='" + res.baseUri+res.results[0].image+"'width='400' /> <br> amount of servings: " + res.results[0].servings
+			getsource(res.results[0].id)
+		}
+	})
+}
+
+
+
+</script>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>fetch</title>
+</head>
+<body>
+
+	<div id="output"></div> <!-- set a blank results div -->
+
+</body>
+
+<script>
+
+
+	id = '716429' //variable for recipe id
+	fetch("https://api.spoonacular.com/recipes/" + id + "/information?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14") //requesting the recipe information by id using my api key
+		.then((res) => res.json()) // converting data to json
+    	.then(output => {
+        	var data = output;
+        	console.log(data); //printing all data for recipe into console
+        	info = data.healthScore //setting a variable for the health score of the specific recipe
+        	document.getElementById("output").innerHTML = info //putting the healthSchore into the output div
+    } 
+)
+    	
+</script>
+</html>

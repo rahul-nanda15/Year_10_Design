@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>sequential search</title>
+</head>
+<body>
+
+	<input type="text" id="search"> <!-- input field html -->
+
+	<button onclick="goRecipe()" id="submit">submit</button> <!--creating a button to carry out the sequential search-->
+	<div id="results"></div> <!-- empty results div output of function-->
+
+</body>
+
+<script>
+	
+//example data using example foods/recipes
+	data = [{
+  
+    "name": "burgers",
+    "prep_time": "50 min",
+    "difficulty": "easy",
+    "ingredients": "beef, buns, cheese, ketchup, onion" 
+  },
+  {
+  
+    "name": "eggs",
+    "prep_time": "20 min",
+    "difficulty": "easy",
+    "ingredients": "eggs, milk, cheese" 
+  },
+  {
+  
+    "name": "pizza",
+    "prep_time": "120 min",
+    "difficulty": "hard",
+    "ingredients": "dough, flour, cheese, tomato sauce" 
+  },
+  {
+  
+    "name": "nachos",
+    "prep_time": "30 min",
+    "difficulty": "easy",
+    "ingredients": "chips, sausage, guacamole, salsa, cheese" 
+  }
+]
+
+function goRecipe(){
+	results = document.getElementById("results")
+	input = document.getElementById("search").value; //setting variables for value of user input field
+	for (meal=0;meal<data.length;meal++) { //for loop to go through data and find meal
+		if (input == data[meal].name){   //search by meal name
+			results.innerHTML = data[meal].name + " will take " + data[meal].prep_time + " to prepare. You will need the following ingredients to prepare it: " + data[meal].ingredients //if it finds the meal name in data, print the following information on the screen
+		}
+		else {
+			alert("please input an existing recipe") //error handling if wrong input is detected
+			return
+		}
+	}
+}
+
+ 
+</script>
+</html>

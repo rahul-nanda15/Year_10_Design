@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>array handling</title>
+</head>
+<body>
+<!-- creating an option select menu of ingredients-->
+	<label for="ingredients">Select ingredients:</label>
+	<select name='ingredients' id="ingredients">
+    <option value="milk">milk</option>
+    <option value="cheese">cheese</option>
+    <option value="pickles">pickles</option>
+    <option value="flour">flour</option>
+    <option value="water">water</option>
+    <option value="chips">chips</option> <!-- ingredient names examples -->
+  </select>
+
+  <button onclick="add()">add to list</button> <!--button used to add ingredient to an array-->
+  <button onclick="view()">view your ingredients</button> <!-- button used to print ingredients onto screen -->
+
+  <div id="text">You added:</div><div id="results"></div><br><div id="final"></div> <!-- empty divs for output.-->
+
+</body>
+<script>
+	
+
+	list = [] //creating an empty array to add ingredients into
+
+	function add() { //functiona adding selected ingreident to list
+
+		val = document.getElementById('ingredients').value
+
+		results = document.getElementById("results") //setting variables for empty divs for output
+ 
+		if (list.includes(val)) { //error handling for repeated ingredient
+
+			alert("you have already added this to your list")
+
+		}
+		else {
+			results.innerHTML = val
+
+
+			list.push(val); //adding selected ingredient to list
+
+			console.log(list) 
+
+		}
+		
+	}
+	function view() {
+		final = document.getElementById("final");
+		final.innerHTML = list //printing the final ingredient list when selected
+	}
+
+
+
+
+</script>
+
+</html>

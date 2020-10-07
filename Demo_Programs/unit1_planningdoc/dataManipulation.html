@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+</body>
+
+<script>
+	//creating an embedded array
+
+nutrientstring = '{"Bananas":[{"calcium":50,"calories":250}, {"protein":5,"potassium":35}], "apple":[{"calcium":32,"calories":77}, {"protein":21,"potassium":43}], "pineapple":[{"calcium":22,"calories":63}, {"protein":43,"potassium":64}]}';
+		
+	//converting data to usable JS object form
+	data = JSON.parse(nutrientstring);
+
+	//example of manipulating the data through using index and keys
+
+	console.log(data["Bananas"][0]["calcium"])
+	console.log(data["apple"][1]["protein"])
+
+
+
+
+</script>
+</html>

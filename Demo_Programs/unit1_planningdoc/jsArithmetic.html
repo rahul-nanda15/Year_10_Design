@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<div id='title'>
+	
+Health Score: How healthy is your recipe? Using this calculation, we can compile different nutritional data and statistics into 1 SUMMARIZED number/value (out of 100). It takes into account your daily requirements of protein, energy, and carbohydrates. <br> For example, when: <br> protein = 20 grams <br> energy = 7000 kilojoules <br> carbs = 250 grams <br> the health score would be (out of 100): <!--calculation description -->
+
+
+</div>
+
+<div id="finals"> <!--creating an empty div for final output-->
+
+
+	
+</div>
+
+</body>
+
+<script>
+	
+	list=[] //creating an empty array to add elements into
+
+	function protein(p) { //getting a decimal value of the percent of daily value for protein (you are expected 50 grams a day)
+		pro = p/50
+		list.push(pro) //pushing this decimal (out of 1.00) into the list
+	}
+	function energy(e) { //getting a decimal value of the percent of daily value for energy (you are expected 8700 kilojoules  a day
+		ener = e/8700
+		list.push(ener) //pushing this decimal into the list
+	}
+	function carbohydrates(c) { //getting a decimal value of the percent of daily value for carbs (you are expected 310 grams a day
+		carb = c/310
+		list.push(carb) //pushing this decimal into the list
+	}
+	protein(20) //calling functions and inputting an example parameter
+	energy(7000)
+	carbohydrates(250)
+
+	console.log(list)
+
+	function average() { //averaging the list to find the actual "health score"
+		var sum = list.reduce(function(a, b){ //adding all elements of the array
+        return a + b;
+    }, 0);
+		ave = sum/3 //averaging the list by dividing its sum by 3
+		console.log(ave)
+	}
+
+
+	function finalScore(){
+		average()
+		final = ave * 100 //function making the decimal an integer out of 100 by multiplying by 100
+		round = final.toPrecision(2) //rounding to a whole number
+		console.log(round)
+		document.getElementById("finals").innerHTML = round //printing final score on the screen
+	}
+
+	finalScore()
+</script>
+</html>
