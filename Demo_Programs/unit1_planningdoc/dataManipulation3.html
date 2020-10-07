@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>data manip 3</title>
+</head>
+<body>
+
+
+
+
+</body>
+
+
+
+<script>
+    
+
+
+//data taken directly from my API documentation. this is used as an existing example to familiarize myself what the type of data is included in my api.
+pineappleInfo = [ //nutritional and general information about pineapple
+
+{
+    "id": 9266, //ingredient id on api docs
+    "aisle": "Produce",   
+    "name": "pineapple",
+    "image": "pineapple.jpg", 
+    "amount": 1.0,
+    "consistency": "solid",
+    "estimatedCost": {
+        "unit": "US Cents",  //embedded objects and values example
+        "value": 299.0
+    },
+    "meta": [],
+    "original": null,
+    "originalName": null,
+    "shoppingListUnits": [
+        "pieces"
+    ],
+    "unit": "",
+    "unitLong": "",
+    "unitShort": "",
+    "possibleUnits": [
+        "piece",
+        "slice",
+        "fruit",
+        "g",
+        "cup",
+        "serving"
+    ],
+    "categoryPath": [
+        "tropical fruit",
+        "fruit"
+    ]
+}
+
+]
+
+console.log(pineappleInfo[0]['name'] + ' is a ' + pineappleInfo[0]['categoryPath'][0]) //this is a brief example of how I am able to extract certain objects and values using array indexing. here I specifically extracted the name of the ingredient (pineapple) and its category of fruit
+
+
+
+</script>
+</html>

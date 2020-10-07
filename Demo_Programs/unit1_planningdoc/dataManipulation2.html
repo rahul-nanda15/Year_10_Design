@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>data manipulation ex:2</title>
+</head>
+<body>
+
+</body>
+
+<script>
+
+//this is a data manipulation program that adds the quantities of each ingredient in nachos into a single serving size (grams)
+	
+//creating an embedded object array
+	Nachos = {ingredients:[
+	{name: 'chips', quantity: 50},
+	{name: 'cheese', quantity: 25},
+	{name: 'salsa', quantity: 10},
+	{name: 'beef', quantity: 75}
+	]};
+
+
+
+
+let recipe = Nachos['ingredients'];
+
+servingSize = 0 //setting the serving size to 0 before summing quantities
+
+for (let i=0, len = recipe.length; i<len; i ++) { // for loop to find gather the quanities of each ingredient within the ingredient array
+
+	console.log(recipe[i]['quantity']);
+
+	var size = recipe[i]['quantity']
+
+	var servingSize = servingSize + size //adding each object's serving size to the total
+
+	console.log(servingSize) //printing the final serving size. in this case, it should print 160
+
+}
+
+</script>
+</html>
