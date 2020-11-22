@@ -1,0 +1,476 @@
+<html>
+
+	<head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+	<link rel="stylesheet" href="byRecipe.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@2.3.0/dist/aos.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://kit.fontawesome.com/4b51920527.js"></script>
+	
+			<title>Test</title>
+
+	</head>
+
+	<body>
+<div id="filler" class="has-background-success" data-aos="fade-up"></div>
+
+<div id="navContain" data-aos="fade-up">
+	<nav class="breadcrumb is-centered  has-bullet-separator is-success has-background-success" aria-label="breadcrumbs">
+  <ul>
+    <li><a class="has-text-white has-text-weight-semibold" href="index.html">Home</a></li>
+   <li class="is-active"><a href="#" aria-current="page">Recipe Search</a></li>
+    <li><a class="has-text-white has-text-weight-semibold"href="byIngredient.html">Fridge Search</a></li>
+   
+    <li><a class="has-text-white has-text-weight-semibold"href="#">Our Data</a></li>
+    
+  </ul>
+</nav>	
+</div>
+
+<div id="fridgeSearch" data-aos="fade-up">
+	
+
+	<div class="has-background-success">
+		<div id="Greentitle" data-aos="fade-up"><h1 class="is-size-1 has-text-white has-text-centered is-family-primary has-text-weight-bold">Recipe Search</h1></div>
+		<div class="has-background-success" id="whitetext">
+
+			<div class="fSearch-container">
+
+
+				  <div class="Fwidget">
+
+				  		<div class="card">
+							  <header class="card-header">
+							    <p class="card-header-title has-text-success">
+							      Search By Keyword
+							      <i class="fas fa-search" id="ham"></i>
+							    </p>
+							    
+							  </header>
+							  <div class="card-content">
+							    <div class="content">
+							    	Using this widget, you may enter any recipe name or keyword and our data will provide you with the most healthy recipe option based on our generated Nutrition Score.
+							      	<div id="searchBar">
+							      	<div class="field">
+										  <p class="control has-icons-left has-icons-right">
+										    <input id="search" class="input input is-success" placeholder="Enter recipe keyword...">
+										    <span class="icon is-small is-left">
+										      <i class="fas fa-search"></i>
+										    </span>
+										    <span class="icon is-small is-right">
+										      <i class="fas fa-leaf"></i>
+										    </span>
+										  </p>
+										</div></div>
+
+										<div id="RandomRecent">
+											
+											<div id="recent">
+												<div id="textContain">Recent Searches: </div>
+												<div id="recentText">  ~xxxxxxxx<br></div>
+											</div>
+
+										</div>
+
+							    </div>
+							  </div>
+							
+						</div>
+
+				  </div>
+
+				  		
+
+
+				  <div class="Fresults">
+				  	
+
+				  		<div class="card">
+							  <header class="card-header">
+							    <p class="card-header-title has-text-success">
+							      Search Results
+							      <i class="fas fa-list-alt" id="ham"></i>
+							    </p>
+							  </header>
+							  <div class="card-content">
+							    <div class="content">
+							      We've searched our database and this is what we found as your healthiest option. You will be able to view in-depth data and information necessary for preparing the meal.
+							     
+
+							      <div class="info1">
+							      	
+							      	<div class="recipeImg" id="image"></div>
+  									<div class="infoRight">
+
+  										<h3 class="has-text-success" id="recipeName">Recipe Name</h3>
+
+  										<h5 class="has-text-success is-size-6 has-text-weight-bold" id="Nscore">Nutrition Score:</h5>
+  										
+  										<h5 class="has-text-success is-size-6 has-text-weight-light" id="time">Preparation Time</h5>
+  										<h5 class="has-text-success is-size-6 has-text-weight-light" id="difficulty">Difficulty</h5>
+  										<h5 class="has-text-success is-size-6 has-text-weight-light" id="calories">Calories</h5>
+  										<h5 class="has-text-success is-size-6 has-text-weight-light is-capitalized" id="diets">Diets</h5>
+  										<h5 class="has-text-success is-size-6 has-text-weight-light" id="cuisine">Cuisine</h5>
+  										
+
+  									</div>
+
+							      </div>
+
+							    </div>
+							  </div>
+							  <footer class="card-footer">
+							  		
+								    <a id="link" href="" class="card-footer-item has-text-success">View Recipe Steps <i class="fas fa-link" id="ham"></i></a>
+								    <a href="#" class="card-footer-item"></a>
+								    <a class="card-footer-item has-text-success modal-button" data-target = "#modal">View More<i id="ham" class="fas fa-plus"></i></a>
+	  </footer>
+							  
+						</div>
+
+				  </div> 
+			</div>
+
+		</div>
+
+
+	</div>
+
+</div>
+
+ <div id="popcon">
+		<section class = "section" id="popup">
+         <div class = "container">
+
+         	
+
+            <div id = "modal" class = "modal">
+               <div class = "modal-background"></div>
+               <div class = "modal-content">
+
+                  
+                     <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title has-text-weight-bold has-text-success" id="poptitle"></p>
+    </header>
+    <section class="modal-card-body">
+    	<p class="has-text-weight-bold" id="ingredientContain">Summary<br><br></p>
+    	<div id="ingredientContain"><div id="summary"></div></div><br><br>
+
+    	<p class="has-text-weight-bold" id="ingredientContain">Nutritional Info<br><br></p>
+
+    	<div id="nutrientInfo" class="is-success">
+    		
+    			Nutrient (Quantity)<br><div class="pContain">Percent of Daily Value: ____<progress class="progress is-success" value="60" max="100"></progress></div>
+
+    	</div>
+    	<br><br> <p class="has-text-weight-bold" id="ingredientContain">Ingredient Info<br><br></p>
+    	<div id="ingredientContain"><div class="field is-grouped is-grouped-multiline" id="ingredientInfo">
+
+    	</div></div>
+    	<br><br><p class="has-text-weight-bold" id="ingredientContain">Other Options for Your Searched Keyword<br><br></p>
+    	<div id="subtitle">Recipe (Nutrition Score)<br><br></div><div id="otherRecipe" class="is-capitalized">
+    		
+
+
+    	</div>
+      <!-- Content ... -->
+    </section>
+  </div>
+               
+               </div>
+               <button class = "modal-close is-large" aria-label = "close"></button>
+            </div>
+         </div>
+      </section></div>
+
+     <div id="testdivs">
+
+      <div id="output"></div>
+    <div id="name"></div>
+    <div id="working"></div>
+
+
+<div id="sample"></div></div>
+
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  		<script src="https://unpkg.com/aos@2.3.0/dist/aos.js"></script>
+  		
+	</body>
+
+	<script>
+
+		
+
+		
+
+		enterkey = document.getElementById("search")   
+		enterkey.addEventListener('keyup', function(event) {
+		  if (event.keyCode === 13) {
+		    goSearch();
+		  }
+		});
+		
+			$(function() {
+  $('a[href*=#]').on('click', function(e) {
+    e.preventDefault();
+    $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top}, 500, 'linear');
+  });
+});
+
+			AOS.init({
+  duration: 1600,
+})
+
+ $(".modal-button").click(function() {
+            var target = $(this).data("target");
+            $("html").addClass("is-clipped");
+            $(target).addClass("is-active");
+         });
+         
+         $(".modal-close").click(function() {
+            $("html").removeClass("is-clipped");
+            $(this).parent().removeClass("is-active");
+         });
+
+
+
+List = []
+
+var result = document.getElementById("search").value
+
+
+async function fetchURL(url, callNumber)
+
+
+
+{
+
+    recipeList = []
+    scoreList = []
+
+    console.log(url);
+    console.log("Callnumber = " + callNumber)
+    await fetch(url)
+        .then((res) => res.json())
+        .then(async(output) => 
+        {
+            var data = output;
+            console.log(data);
+            document.getElementById("working").innerHTML = "it is working"
+
+          
+
+            if (callNumber == 1)
+            {
+
+            data2 = data['searchResults'][0]['results']
+            if (data2.length == 0){
+            	alert("Your Recipe Keyword does not exist in our dataset. Please try again using another input. E.g. Chicken Burrito, Pasta")
+            	return
+            }
+            recipeMaster = []
+            for (recipe in data2){
+            	var recName = data2[recipe]["name"]
+            	
+                var recipeIndex = data2.indexOf(data2[recipe])
+                var meal = data2[recipe]["id"]
+                console.log(meal)
+              
+                recipeList.push(meal)
+                
+               
+                
+                await fetch("https://api.spoonacular.com/recipes/"+meal+"/nutritionWidget.json?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14")
+
+                .then((res) => res.json()) // converting data to json
+                .then(output => {
+                var data1 = output;
+                console.log(data1)
+                var goodNutrients = data1['good']
+                sum=0
+                var numNutrients = goodNutrients.length
+
+                for (nutrient=0; nutrient<goodNutrients.length; nutrient++){
+                    percentValue = goodNutrients[nutrient]["percentOfDailyNeeds"]
+                    sum = sum + percentValue;
+            }
+
+            var NutritionValue = sum/numNutrients
+            var finalScore = Math.round(NutritionValue)
+            console.log(finalScore);
+            scoreList.push(finalScore)
+            var Recipeinfo = recName + " (" + finalScore + ")"
+            recipeMaster.push(Recipeinfo)
+            
+                
+                
+                 })
+            }
+            console.log(recipeMaster)
+            document.getElementById("otherRecipe").innerHTML = recipeMaster.join(" <br> ")
+            console.log(recipeList)
+            console.log(scoreList)
+            var best = Math.max(...scoreList)
+            console.log(best)
+            var indexNum = scoreList.indexOf(best)
+            var BestFood = recipeList[indexNum]
+            console.log(BestFood)
+            document.getElementById("output").innerHTML = BestFood
+            if (best>125){
+            	document.getElementById("Nscore").innerHTML = "Nutrition Score: " + best +" (Extremely Healthy)";
+
+            }
+            else if (best>75){
+            	document.getElementById("Nscore").innerHTML = "Nutrition Score: " + best+" (Very Healthy)";
+            }
+            else if (best>35){
+            	document.getElementById("Nscore").innerHTML = "Nutrition Score: " + best+" (Moderately Healthy)";
+            }
+            else{
+            	document.getElementById("Nscore").innerHTML = "Nutrition Score: " + best+" (Not Healthy)";
+            }
+            
+
+
+
+
+                }
+            else if (callNumber == 2){
+            	var name = data['title']
+                console.log(name)
+                List.push(name)
+                document.getElementById("search").value = ""
+                var allRecent = List.join(" <br> ")
+                document.getElementById("recentText").innerHTML = allRecent
+                document.getElementById("recipeName").innerHTML = name;
+                 document.getElementById("poptitle").innerHTML = name;
+                
+            	document.getElementById("time").innerHTML = "Preparation Time: " + data["readyInMinutes"] + " minutes"
+            	var steps = data["analyzedInstructions"][0]["steps"].length
+            	if (steps>15){
+            		document.getElementById("difficulty").innerHTML = "Difficulty: Experienced Chef (Hard)"
+            	}
+            	else if (steps>5){
+            		document.getElementById("difficulty").innerHTML = "Difficulty: Intermediate Chef (Medium)"
+            	}
+            	else {
+            		document.getElementById("difficulty").innerHTML = "Difficulty: Beginner Chef (Easy)"
+            	}
+
+
+                RecName = document.getElementById("name");
+                RecName.innerHTML = data["title"]
+                recipeLink = data["sourceUrl"]
+                console.log(recipeLink)
+                document.getElementById("link").href = recipeLink;
+                document.getElementById("diets").innerHTML = "Diets: " + data["diets"].join(", ")
+                document.getElementById("cuisine").innerHTML = "Cuisine: "+ data["cuisines"].join(", ")
+                if (data["cuisines"].length == 0){
+                	document.getElementById("cuisine").innerHTML = "Cuisine: None"
+                }
+               var ImageURL = data['image']
+               console.log(ImageURL)
+               document.getElementById("image").innerHTML = "<img id='foodimg' src="+ImageURL+">"
+               document.getElementById("image").style.backgroundColor= "white";
+               document.getElementById("image").style.height= "220px";
+               document.getElementById("image").style.paddingRight= "20px";
+               document.getElementById("summary").innerHTML = data["summary"]
+               //data["summary"]
+
+
+            }
+
+            else if (callNumber == 3){
+
+               
+
+               
+            }
+            else if (callNumber==4){
+            	nutrientInfoList = []
+            	document.getElementById("calories").innerHTML = "Calories: " + data["calories"]
+            	var goodNutrients = data['good']
+            	var pBarclass = "is-success is-large"
+
+            	
+            	for (nutrients=0;nutrients<13;nutrients++){
+            		var nutrientName = goodNutrients[nutrients]['title']
+            		var amount = goodNutrients[nutrients]['amount']
+            		var dailyValue = Math.round(goodNutrients[nutrients]['percentOfDailyNeeds'])
+            		var datastring = nutrientName+" ("+amount+")<br><div class='pContain'>Percent of Daily Value: "+dailyValue+"%<progress class='"+pBarclass+"' value='"+dailyValue+"' max ='100'>"+dailyValue+"</progress></div>"
+            		
+            		nutrientInfoList.push(datastring);
+
+            		
+
+            		
+
+            		
+            		
+            	}
+            	document.getElementById("nutrientInfo").innerHTML = nutrientInfoList.join("<br>")
+
+
+            }
+            else if (callNumber == 5){
+                
+            }
+            else if (callNumber == 6){
+            	console.log("working")
+
+            	ingredientList = []
+            	foodList = data["ingredients"]
+            	for (food=0;food<foodList.length;food++){
+            		var ingredientName = foodList[food]["name"];
+            		var amount = Math.round(foodList[food]["amount"]["metric"]["value"]) + " " + foodList[food]["amount"]["metric"]["unit"];
+            		var ingredientString = "<div class='tags has-addons px-1'><span class='tag'>"+amount+"</span><span class='tag is-success'>"+ingredientName+"</span></div>"
+            		ingredientList.push(ingredientString)
+            	}
+            	//console.log(ingredientList)
+            	document.getElementById("ingredientInfo").innerHTML = ingredientList.join(" ")
+
+
+            	//<div class="tags has-addons">
+      			//	<span class="tag">quantity</span>
+      			//	<span class="tag is-success">ingredient</span>
+    			//</div>
+            }
+
+        })
+       /* .catch(function(err){
+        	alert("error")
+        })*/
+
+
+}
+async function goSearch()
+{
+	result = document.getElementById("search").value;
+    url1 = "https://api.spoonacular.com/food/search?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14&query="+result;
+    await fetchURL(url1, 1);
+    foodname = document.getElementById("output").innerHTML
+    url2 = "https://api.spoonacular.com/recipes/"+foodname+"/information?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14";
+    await fetchURL(url2, 2);
+    RecName = document.getElementById("name");
+    url3 = "https://api.spoonacular.com/recipes/search?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14&number=1&query="+result;
+    await fetchURL(url3, 3);
+    url4 = "https://api.spoonacular.com/recipes/"+foodname+"/nutritionWidget.json?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14";
+    await fetchURL(url4, 4)
+    url5 = "https://api.spoonacular.com/recipes/"+foodname+"/summary?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14";
+    await fetchURL(url5, 5)
+    url6 = "https://api.spoonacular.com/recipes/"+foodname+"/ingredientWidget.json?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14";
+    await fetchURL(url6, 6)
+    
+    //similar recipes
+
+}
+
+
+
+
+
+	</script>
+
+
+</html>

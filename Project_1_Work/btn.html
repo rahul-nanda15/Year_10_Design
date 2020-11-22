@@ -1,0 +1,58 @@
+<html> 
+
+	<head>
+
+		<title></title>
+
+	</head>
+
+	<body>
+		
+		
+		<input type="text" id="box">
+		<button onclick="Addto()" id="btn">add</button>
+		<button onclick="removeList()" id="remove">remove</button>
+		<div id="output"></div>
+
+
+	
+
+	<script>
+
+		mylist = [""]
+
+		function Addto(){
+			var element = document.getElementById("box").value
+			console.log(element)
+			mylist.push(element)
+			console.log(mylist)
+			page = mylist.join("<button onclick='remove()'>go</button>")
+			document.getElementById("output").innerHTML = page
+			//outputF = document.getElementById('output')
+			//output.innerHTML = mylist.join("<button onclick="remove()">test</button>")
+		}
+
+		function removeList(){
+			var element = document.getElementById("box").value
+			var index = mylist.indexOf(element)
+			console.log(index)
+			if (mylist.includes(element)){
+				mylist.splice(index, 1)
+				console.log(mylist)
+			}
+			else {
+				alert("this item is not in your ingredient basket")
+			}
+
+		}
+
+
+	
+
+	
+
+	</script>
+</body>
+
+
+</html>

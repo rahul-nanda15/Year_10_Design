@@ -1,0 +1,126 @@
+<html> 
+
+	<head>
+
+		<title></title>
+
+	</head>
+
+	<body>
+		
+		<input type="text" id="tbox">
+		<button onclick="goSearch()" id="querybtn">search</button>
+		<div id="test"></div>
+		<div id="recent"></div>
+		<div id="image"></div>
+
+
+	
+
+	<script>
+//how to show all recipe results and how to do modular programming, charts and exporting to another page. data taking too long to load. when you run the function the computer does not know what data is if you try referring to it later. do we need to annotate our html and css?
+		List = []
+	
+	function goSearch() {
+
+		empty=document.getElementById("test");
+		empty.innerHTML = '';
+
+		result = document.getElementById("tbox").value;
+		console.log(result)
+
+		apikey = "1e4ac0fc6eff4598a34767b5a6ffaa14";
+		url = "https://api.spoonacular.com/recipes/search?apiKey="+apikey+"&number=1&query="+result;
+		fetch(url)
+		.then((res) => res.json()) // converting data to json
+    	.then(output => {
+        	var data = output;
+        	console.log(data);
+        	console.log(data['totalResults'])
+        	console.log(data['results'][0]['id'])
+        	foodname = data['results'][0]['id']
+        	empty.innerHTML = foodname
+        	if (empty.innerHTML == ""){
+        		alert("please try again")
+        	}
+        	var ImageURL = data['baseUri'] + data['results'][0]['image']
+        	console.log(ImageURL)
+        	document.getElementById("image").innerHTML = "<img src="+ImageURL+">"
+    			
+		url2 = "https://api.spoonacular.com/recipes/"+foodname+"/information?apiKey="+apikey;
+		fetch(url2)
+		
+		 //requesting the recipe information by id using my api key
+		.then((res) => res.json()) // converting data to json
+    	.then(output => {
+        	var data = output;
+        	console.log(data);
+        	console.log(data['spoonacularScore'])
+
+        url3 = "https://api.spoonacular.com/recipes/"+foodname+"/similar?apiKey="+apikey;
+		fetch(url3)
+		
+		 //requesting the recipe information by id using my api key
+		.then((res) => res.json()) // converting data to json
+    	.then(output => {
+        	var data = output;
+        	console.log(data);
+        	
+        url4 = "https://api.spoonacular.com/recipes/"+foodname+"/nutritionWidget.json?apiKey="+apikey;
+		fetch(url4)
+	
+		 //requesting the recipe information by id using my api key
+		.then((res) => res.json()) // converting data to json
+    	.then(output => {
+        	var data = output;
+        	console.log(data["good"][0]["percentOfDailyNeeds"]);
+        	dataB = data["good"]
+        	console.log(dataB)
+        	sum = 0
+        	var numNutrients = dataB.length
+        	for (nutrient=0; nutrient<dataB.length; nutrient++){
+        		percentValue = dataB[nutrient]["percentOfDailyNeeds"]
+        		console.log(percentValue)
+        		sum = sum + percentValue;
+        	}
+        	var NutritionValue = sum/numNutrients
+        	console.log(Math.round(NutritionValue));
+
+        url5 = "https://api.spoonacular.com/recipes/"+foodname+"/summary?apiKey="+apikey;
+		fetch(url5)
+		 //requesting the recipe information by id using my api key
+		.then((res) => res.json()) // converting data to json
+    	.then(output => {
+        	var data = output;
+        	console.log(data);
+        	var name = data['title']
+
+
+        
+        List.push(name)
+        document.getElementById("recent").innerHTML = List.join('<br>')
+
+
+    } 
+)
+
+    } 
+)
+    } 
+)
+    	
+    } 
+)
+    }
+)
+
+
+	}
+
+	
+
+	</script>
+</body>
+
+
+</html>

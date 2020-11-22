@@ -1,0 +1,65 @@
+<html> 
+
+	<head>
+
+		<title></title>
+
+	</head>
+
+	<body>
+		
+		
+
+	
+
+	<script>
+
+	
+	async function fetchURL(url, callNumber){
+		
+		await fetch(url)
+		.then((res) => res.json()) 
+    	.then(output => {
+    		var data = output;
+        	console.log(data);
+        	if (callNumber == 1){
+        		foodname = data['results'][0]['id']
+        	}
+        })
+    	return(foodname)
+    }
+	url1 = "https://api.spoonacular.com/recipes/search?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14&number=1&query=salad"
+	
+
+	
+food = fetchURL(url1, 1);
+url2 = "https://api.spoonacular.com/recipes/"+food+"/information?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa1;"
+fetchURL(url2, 2);
+url3 = "https://api.spoonacular.com/recipes/"+food+"/similar?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa1";
+fetchURL(url3, 2)
+
+
+
+//{ url2 and url3
+// in order to do the 2nd and 3rd function, it needs the data and variables that were produced from the 1st function}
+	
+	
+
+	
+
+
+	
+
+
+//function creatiio(url1){
+//	url1 = "https://api.spoonacular.com/recipes/search?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14&number=1&query=salad";
+//	console.log(data)
+//}
+
+	
+
+	</script>
+</body>
+
+
+</html>

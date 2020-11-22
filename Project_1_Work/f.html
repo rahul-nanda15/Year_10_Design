@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>fetch</title>
+</head>
+<body>
+    <div id="output"></div>
+    <div id="name"></div>
+	<input type="text" id="search"><button onclick="find()">submit</button>
+
+
+<script>
+
+List = []
+
+var result = document.getElementById("search").value
+
+async function fetchURL(url, callNumber)
+
+{
+
+    recipeList = []
+    scoreList = []
+
+    console.log(url);
+    console.log("Callnumber = " + callNumber)
+    await fetch(url)
+        .then((res) => res.json())
+        .then(async(output) => 
+        {
+            var data = output;
+            console.log(data);
+            if (callNumber == 1)
+            {
+
+                
+
+            data2 = data['searchResults'][0]['results']
+            
+            for (recipe in data2){
+                var recipeIndex = data2.indexOf(data2[recipe])
+                var meal = data2[recipe]["id"]
+                console.log(meal)
+              
+                recipeList.push(meal)
+               
+                
+                await fetch("https://api.spoonacular.com/recipes/"+meal+"/nutritionWidget.json?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14")
+
+                .then((res) => res.json()) // converting data to json
+                .then(output => {
+                var data1 = output;
+                console.log(data1)
+                var goodNutrients = data1['good']
+                sum=0
+                var numNutrients = goodNutrients.length
+
+                for (nutrient=0; nutrient<goodNutrients.length; nutrient++){
+                    percentValue = goodNutrients[nutrient]["percentOfDailyNeeds"]
+                    sum = sum + percentValue;
+            }
+
+            var NutritionValue = sum/numNutrients
+            var finalScore = Math.round(NutritionValue)
+            console.log(finalScore);
+            scoreList.push(finalScore)
+            
+                
+                
+                 })
+            }
+
+            console.log(recipeList)
+            console.log(scoreList)
+            var best = Math.max(...scoreList)
+            console.log(best)
+            var indexNum = scoreList.indexOf(best)
+            var BestFood = recipeList[indexNum]
+            console.log(BestFood)
+            document.getElementById("output").innerHTML = BestFood
+            //document.getElementById("Nscore").innerHTML = "Nutrition Score: " + best;
+
+
+                }
+            else if (callNumber == 2){
+                RecName = document.getElementById("name");
+                RecName.innerHTML = data["title"]
+                recipeLink = data["sourceUrl"]
+                console.log(recipeLink)
+                //document.getElementById("link").href = recipeLink;
+            }
+
+            else if (callNumber == 3){
+               var ImageURL = data['baseUri'] + data['results'][0]['image']
+               console.log(ImageURL)
+               //document.getElementById("image").innerHTML = "<img id='foodimg' src="+ImageURL+">"
+               //document.getElementById("image").style.backgroundColor= "white";
+               //document.getElementById("image").style.height= "220px";
+               //document.getElementById("image").style.paddingRight= "20px";
+            }
+            else if (callNumber==4){
+
+            }
+            else if (callNumber == 5){
+                var name = data['title']
+                console.log(name)
+                List.push(name)
+                document.getElementById("search").value = ""
+                var allRecent = List.join(" <br> ")
+                //document.getElementById("recentText").innerHTML = allRecent
+                //document.getElementById("recipeName").innerHTML = name;
+            }
+
+        })
+}
+
+async function find()
+{
+    result = document.getElementById("search").value;
+    url1 = "https://api.spoonacular.com/food/search?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14&query="+result;
+    await fetchURL(url1, 1);
+    foodname = document.getElementById("output").innerHTML
+    url2 = "https://api.spoonacular.com/recipes/"+foodname+"/information?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14";
+    await fetchURL(url2, 2);
+    RecName = document.getElementById("name");
+    url3 = "https://api.spoonacular.com/recipes/search?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14&number=1&query="+result;
+    await fetchURL(url3, 3);
+    url4 = "https://api.spoonacular.com/recipes/"+foodname+"/nutritionWidget.json?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14";
+    await fetchURL(url4, 4)
+    url5 = "https://api.spoonacular.com/recipes/"+foodname+"/summary?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14";
+    await fetchURL(url5, 5)
+    
+    
+
+
+
+}
+
+
+
+    
+
+
+
+
+
+
+
+	
+    	
+</script>
+</body>
+<style>
+    
+
+
+#cars {
+    display: none;
+}
+</style>
+</html>

@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+
+
+<script type="text/javascript">
+	
+	apikey = "1e4ac0fc6eff4598a34767b5a6ffaa14";
+	url = "https://api.spoonacular.com/food/search?apiKey="+apikey+"&query=apple";
+		fetch(url)
+		//	, {
+		//	headers: {
+		//		'X-API-KEY': apikey,
+		//		"Content-Type": "application/json"
+		//	}
+		//}
+		 //requesting the recipe information by id using my api key
+		.then((res) => res.json()) // converting data to json
+    	.then(output => {
+        	var data = output;
+        	var allRecipes = data["searchResults"][0]["results"]
+
+        	recipeList = []
+        	scoreList = []
+        	var best = ""
+
+
+        	for (recipeID=0; recipeID<allRecipes.length; recipeID++){
+        	
+        		var meal = allRecipes[recipeID]["id"]
+        		console.log(meal)
+        		recipeList.push(meal)
+        		fetch("https://api.spoonacular.com/recipes/"+meal+"/nutritionWidget.json?apiKey="+apikey) //requesting the recipe information by id using my api key
+                .then((res) => res.json()) // converting data to json
+                .then(output => {
+                var data = output;
+                console.log(data);
+                var goodNutrients = data['good']
+                sum=0
+                var numNutrients = goodNutrients.length
+                for (nutrient=0; nutrient<goodNutrients.length; nutrient++){
+                    percentValue = goodNutrients[nutrient]["percentOfDailyNeeds"]
+                    sum = sum + percentValue;
+
+            }
+             var NutritionValue = sum/numNutrients
+             var finalScore = Math.round(NutritionValue)
+             console.log(finalScore);
+             
+             scoreList.push(finalScore)
+             
+             //scoreList.push(finalScore)
+
+           
+
+
+
+
+                    }
+
+                )
+
+                
+
+            }
+
+
+            console.log(scoreList)
+            //console.log(recipeList)
+            //var best = Math.max(...recipeList)
+            //console.log(best)
+            //var x = scoreList.join(" ")
+            //console.log(x)
+            
+
+            //f = []
+            //b = f.push(scoreList)
+            //console.log(f[0])
+
+
+
+          
+            
+
+            
+
+
+    } 
+)
+
+    
+    
+
+
+
+    	
+
+</script>
+
+</body>
+</html>
+

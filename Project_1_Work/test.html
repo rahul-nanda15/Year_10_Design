@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>fetch</title>
+</head>
+<body>
+
+	<div id="output"></div>
+    
+        <label for="cars">Choose an ingredient:</label>
+        <select name="cas" id="cars">
+        <option>chicken</option>
+        <option>sugar</option>
+        <option>rice</option>
+        <option>water</option>
+        <option>soda</option>
+        </select>
+    <br><br>
+ <button onclick="goSearch2()" id="sub">Go</button>
+ <button onclick="show()" id="showInfo">Show</button>
+ <button onclick="clearList()" id="addto">clear list</button>
+
+ <canvas id="myCanvas" width="500" height="100"></canvas>
+
+<div id="o"></div>
+
+<button onclick="addBTN()">add</button>
+<button onclick="removeitem()">remove</button>
+
+<table cellspacing="0" rules="all" border="0" id="Table" style="border-collapse: collapse;">
+    <tr>
+        <th>&nbsp;</th>
+        <th style="width:80px">Customer Id</th>
+        
+    </tr>
+</table>
+<table cellspacing="0" rules="all" border="0" id="Table1" style="border-collapse: collapse;">
+    <tr>
+        <th>&nbsp;</th>
+        <th style="width:80px"></th>
+        
+    </tr>
+    
+</table>
+
+<div id="sample"></div>
+
+
+<script>
+
+function show(){
+    document.getElementById("cars").style.display = "block";
+}
+    //var c = document.getElementById("myCanvas");
+    //var ctx = c.getContext("2d");
+    //ctx.font = "10px Arial";
+    //ctx.fillText("Hello World", 10, 10);
+
+
+    mylist=[]
+
+function clearList(){
+    mylist=[]
+    console.log(mylist)
+    document.getElementById("output").innerHTML = "Your Ingredients: "
+}
+function addBTN(){
+
+    var response = document.getElementById("cars");
+    var num = response.options[response.selectedIndex].value;
+    var f = response.options[response.selectedIndex].text;
+
+    if (mylist.includes(f)){
+        alert("please choose another ingredient")
+    }
+    else{
+        mylist.push(f)
+    console.log(mylist)
+
+    var table = document.getElementById("Table1");
+    var row = table.insertRow(0);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    cell2.innerHTML = f;
+    cell1.innerHTML = "<input type='checkbox' value='1' name='box'/>";
+    }
+
+    
+
+}
+
+function removeitem(){
+    var grid = document.getElementById("Table1");
+ 
+        //Reference the CheckBoxes in Table.
+    var checkBoxes = grid.getElementsByTagName("INPUT");
+    var message = "Id Name                  Country\n";
+ 
+        //Loop through the CheckBoxes.
+    for (var i = 0; i < checkBoxes.length; i++) {
+         if (checkBoxes[i].checked) {
+            var row = checkBoxes[i].parentNode.parentNode;
+            message = row.cells[1].innerHTML;
+            grid.deleteRow(i)
+            console.log(message)
+            if (mylist.includes(message)){
+                var ingredientIndex = mylist.indexOf(message)
+                mylist.splice(ingredientIndex, 1);
+                console.log(mylist)
+            }
+
+              
+                
+            }
+        }
+}
+
+async function IngredientSearch(url, CallNumber){
+    recipeList = []
+          
+    scoreList = []
+
+    var final = mylist.join(",+")
+    console.log(final)
+    
+
+    
+    await fetch(url) //requesting the recipe information by id using my api key
+        .then((res) => res.json()) // converting data to json
+        .then(async(output) => {
+            var data = output;
+            console.log(data); //printing all data for recipe into console
+            
+            if (CallNumber == 1){
+            
+            for (recipe in data){
+                var recipeIndex = data.indexOf(data[recipe])
+                var meal = data[recipe]["id"]
+                console.log(meal)
+              
+                recipeList.push(meal)
+               
+                
+                await fetch("https://api.spoonacular.com/recipes/"+meal+"/nutritionWidget.json?apiKey="+apikey)
+
+                .then((res) => res.json()) // converting data to json
+                .then(output => {
+                var data1 = output;
+                console.log(data1)
+                var goodNutrients = data1['good']
+                sum=0
+                var numNutrients = goodNutrients.length
+
+                for (nutrient=0; nutrient<goodNutrients.length; nutrient++){
+                    percentValue = goodNutrients[nutrient]["percentOfDailyNeeds"]
+                    sum = sum + percentValue;
+            }
+
+            var NutritionValue = sum/numNutrients
+            var finalScore = Math.round(NutritionValue)
+            console.log(finalScore);
+            scoreList.push(finalScore)
+            
+                
+                
+                 })
+            
+                
+
+            }
+            console.log(recipeList)
+            console.log(scoreList)
+            var best = Math.max(...scoreList)
+            console.log(best)
+            var indexNum = scoreList.indexOf(best)
+            var BestFood = recipeList[indexNum]
+            document.getElementById("sample").innerHTML = BestFood
+
+        }
+
+        if (CallNumber == 2){
+
+        }
+
+          
+
+
+    } 
+)
+
+    }
+    
+
+
+async function goSearch2()
+{
+    apikey = '1e4ac0fc6eff4598a34767b5a6ffaa14' 
+    var final = mylist.join(",+")
+    url1 = "https://api.spoonacular.com/recipes/findByIngredients?apiKey="+apikey+"&ingredients="+final;
+    await IngredientSearch(url1, 1);
+    foodname = document.getElementById("sample").innerHTML
+    url2 = "https://api.spoonacular.com/recipes/"+foodname+"/information?apiKey="+apikey;
+    await IngredientSearch(url2, 2);
+}
+	
+    	
+</script>
+</body>
+<style>
+    
+
+
+#cars {
+    display: none;
+}
+</style>
+</html>

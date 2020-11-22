@@ -1,0 +1,73 @@
+<html>
+
+<head>
+
+</head>
+
+
+<body>
+	<table cellspacing="0" rules="all" border="1" id="Table1" style="border-collapse: collapse;">
+    <tr>
+        <th>&nbsp;</th>
+        <th style="width:80px">Customer Id</th>
+        
+    </tr>
+    <tr>
+        <td><input type="checkbox"/></td>
+        <td>1</td>
+        
+    </tr>
+    <tr>
+        <td><input type="checkbox"/></td>
+        <td>2</td>
+        
+    </tr>
+    <tr>
+        <td><input type="checkbox"/></td>
+        <td>3</td>
+        
+    </tr>
+    <tr>
+        <td><input type="checkbox"/></td>
+        <td>4</td>
+      
+    </tr>
+</table>
+<br />
+<input type="button" value="Get Selected" onclick="GetSelected()" />
+
+<button onclick="myfunction(9)">here</button>
+
+<script type="text/javascript">
+	
+	function myfunction(num){
+		console.log("yes"+num)
+	}
+
+
+	 function GetSelected() {
+        //Reference the Table.
+        var grid = document.getElementById("Table1");
+ 
+        //Reference the CheckBoxes in Table.
+        var checkBoxes = grid.getElementsByTagName("INPUT");
+        var message = "Id Name                  Country\n";
+ 
+        //Loop through the CheckBoxes.
+        for (var i = 0; i < checkBoxes.length; i++) {
+            if (checkBoxes[i].checked) {
+                var row = checkBoxes[i].parentNode.parentNode;
+                message = row.cells[1].innerHTML;
+                grid.deleteRow(i+1)
+              
+                
+            }
+        }
+ 
+        //Display selected Row data in Alert Box.
+        alert(message);
+    }
+</script>
+</body>
+
+</html>

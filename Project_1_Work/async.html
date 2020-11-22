@@ -1,0 +1,94 @@
+<html>
+<head>
+ </head>
+
+ <body>
+
+<div id="test"></div>
+<div id="image"></div>
+<div id="recent"></div>
+    <script>
+
+        List = []
+        
+async function fetchURL(url, callNumber)
+
+{
+    empty=document.getElementById("test");
+    empty.innerHTML = '';
+    console.log(url);
+    console.log("Callnumber = " + callNumber)
+    await fetch(url)
+        .then((res) => res.json())
+        .then(output => 
+        {
+            var data = output;
+            console.log(data);
+            if (callNumber == 1)
+            {
+                console.log("Got here");
+                foodname = data['results'][0]['id'];
+                console.log("foodname = " + foodname);
+                console.log(data['totalResults'])
+                console.log(data['results'][0]['id'])
+                var ImageURL = data['baseUri'] + data['results'][0]['image']
+                console.log(ImageURL)
+                document.getElementById("image").innerHTML = "<img src="+ImageURL+">"
+                
+            }
+            else if (callNumber == 2)
+            {
+                console.log(data["healthScore"])
+                
+            }
+            else if (callNumber == 3){
+                for (id=0;id<data.length;id++){
+                    console.log(data[id]["id"])
+                }
+            }
+            else if (callNumber == 4){
+                console.log(data["good"][0]["percentOfDailyNeeds"]);
+                dataB = data["good"]
+                console.log(dataB)
+                sum = 0
+                var numNutrients = dataB.length
+                for (nutrient=0; nutrient<dataB.length; nutrient++){
+                    percentValue = dataB[nutrient]["percentOfDailyNeeds"]
+                    console.log(percentValue)
+                    sum = sum + percentValue;
+                }
+                var NutritionValue = sum/numNutrients
+                console.log(Math.round(NutritionValue));
+            }
+            else if (callNumber == 5){
+                var name = data['title']
+                console.log(name)
+                List.push(name)
+                document.getElementById("recent").innerHTML = List.join('<br>')
+            }
+        })
+}
+
+async function goSearch()
+{
+    url1 = "https://api.spoonacular.com/recipes/search?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14&number=1&query=salad"
+    await fetchURL(url1, 1);
+    console.log("food2 = " + foodname);
+    url2 = "https://api.spoonacular.com/recipes/"+foodname+"/information?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14";
+    await fetchURL(url2, 2);
+    url3 = "https://api.spoonacular.com/recipes/"+foodname+"/similar?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14";
+    await fetchURL(url3, 3)
+    url4 = "https://api.spoonacular.com/recipes/"+foodname+"/nutritionWidget.json?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14";
+    await fetchURL(url4, 4)
+    url5 = "https://api.spoonacular.com/recipes/"+foodname+"/summary?apiKey=1e4ac0fc6eff4598a34767b5a6ffaa14";
+    await fetchURL(url5, 5)
+}
+
+
+goSearch();
+
+
+
+    </script>
+ </body>
+</html>
