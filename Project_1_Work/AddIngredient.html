@@ -1,0 +1,96 @@
+<html>
+<head></head>
+
+<body>
+<script>
+
+function addTo(DropDownNumber){
+
+			//parameter that changes depending on the number of the dropdown menu. e.g. each one has its own number from 1-9
+
+			document.getElementById("fillerText").style.display = "none";
+
+			//DOM JS property to display 3 essential buttons (all in btns div) once any ingredient is added
+
+			document.getElementById("btns").style.display = "block";
+
+
+			var ingredientTable = document.getElementById("Table1");
+
+			//insertRow(0) is the lowest row in rable
+
+		    var row = ingredientTable.insertRow(0);
+		    var checkboxCell = row.insertCell(0);
+		    var ingredientCell = row.insertCell(1);
+
+		    //embedded modularzed function with 2 parameters
+
+		    //dropTitle and foodFamily identifies the dropdown menu that is currently being used by the user
+
+		    function addRow(dropTitle, foodFamily){
+
+		    	//setting variable for the selected dropdown (e.g. produce)
+
+				var response = document.getElementById(dropTitle);
+				//setting var for selected ingredient in the dropdown
+				var selectedIngredient = response.options[response.selectedIndex].text;
+
+				//error handling for already existing ingredient
+				if (ingredients.includes(selectedIngredient)){
+					alert("You have already selected this Ingredient")
+				}
+				//error handing to ensure the user selects an actual ingredient and not the "filler" opt for the dropdown
+				else if (selectedIngredient == foodFamily){
+					alert("Please Select an Actual Ingredient")
+				}
+				//set maximum ingredients that can be added to 10
+				else if (ingredients.length == 10){
+					alert("You have reached the maximum of ingredients")
+				}
+				//if no errors, proceed to add ingredient to HTML table
+				else{
+					ingredientCell.innerHTML = selectedIngredient;
+					checkboxCell.innerHTML = "<input type='checkbox' value='1' name='box'/>";
+					ingredients.push(selectedIngredient)
+				}
+				
+			}
+			
+			//specifying parameter actions for each dropdown in the function addRow()
+			if (DropDownNumber == 1){
+
+				//calling function addrow with the parameters of the produce, dairy, beverages, etc dropdown
+
+			addRow("produce","Produce")
+			}
+			else if (DropDownNumber == 2){
+				addRow("dairy","Dairy")	
+			}
+			else if (DropDownNumber == 3){
+				addRow("beverages","Beverages")	
+			}
+			else if (DropDownNumber == 4){
+				addRow("meat","Meat")		
+			}
+			else if (DropDownNumber == 5){
+				addRow("grains","Grain")		
+			}
+			else if (DropDownNumber == 6){
+				addRow("condiments","Condiments")		
+			}
+			else if (DropDownNumber == 7){
+				addRow("seasoning","Seasoning")		
+			}
+			else if (DropDownNumber == 8){
+				addRow("sweets","Sweets")		
+			}
+			else if (DropDownNumber == 9){
+				addRow("seafood","Seafood")
+			}
+		}
+
+
+
+</script>
+</body>
+</html>
